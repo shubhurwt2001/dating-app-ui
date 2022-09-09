@@ -5,6 +5,7 @@ import {
   Image,
   KeyboardAvoidingView,
   Platform,
+  ScrollView,
   StyleSheet,
   Text,
   TextInput,
@@ -15,7 +16,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Images from "../assets/Images";
 
 const width = Dimensions.get("window").width;
-const Login = ({ navigation }) => {
+const Register = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.parent}>
       <KeyboardAvoidingView
@@ -28,7 +29,52 @@ const Login = ({ navigation }) => {
               style={styles.logo}
               resizeMode="cover"
             />
-            <Image source={Images.LogoText} resizeMode="cover" />
+            <Text style={styles.text.heading}>Create New account</Text>
+            <Text style={styles.text.subheading}>
+              Join now and start talking with matches nearby
+            </Text>
+          </View>
+          <View
+            style={{ marginTop: 10, marginHorizontal: 16, width: width - 32 }}
+          >
+            <TextInput
+              style={styles.input}
+              placeholder="Email Address"
+            ></TextInput>
+
+            <TextInput
+              style={styles.input}
+              placeholder="Create a Password"
+            ></TextInput>
+
+            <TextInput
+              style={styles.input}
+              placeholder="Repeat password"
+            ></TextInput>
+          </View>
+          <View style={{ width: "60%" }}>
+            <TouchableOpacity activeOpacity={0.6} style={styles.button}>
+              <Text style={styles.button.text}>Next</Text>
+            </TouchableOpacity>
+
+            <Text
+              style={[styles.button3.text, { fontSize: 14, marginTop: 20 }]}
+            >
+              Already have an Account?{" "}
+              <Text
+                style={[styles.text, { fontSize: 14 }]}
+                onPress={() => navigation.navigate("Login")}
+              >
+                Login
+              </Text>
+            </Text>
+          </View>
+
+          <View style={{ marginTop: 36 }}>
+            <Text style={styles.button3.text}>------------</Text>
+          </View>
+          <View style={{ marginTop: 36 }}>
+            <Text style={styles.button3.text}>or connect with social</Text>
           </View>
           <View style={styles.textContainer}>
             <TouchableOpacity
@@ -53,55 +99,6 @@ const Login = ({ navigation }) => {
               <Image source={Images.Twitter} />
             </TouchableOpacity>
           </View>
-          <View style={{ marginTop: 20 }}>
-            <Text style={styles.button3.text}>------------</Text>
-          </View>
-          <View style={{ marginTop: 20 }}>
-            <Text style={styles.button3.text}>or connect with email</Text>
-          </View>
-          <View
-            style={{ marginTop: 10, marginHorizontal: 16, width: width - 32 }}
-          >
-            <TextInput
-              style={styles.input}
-              placeholder="Email Address"
-            ></TextInput>
-
-            <TextInput
-              style={styles.input}
-              placeholder="Create a Password"
-            ></TextInput>
-
-            <TouchableOpacity>
-              <Text
-                style={styles.text}
-                onPress={() => navigation.navigate("ForgetPassword")}
-              >
-                Forgot Password?
-              </Text>
-            </TouchableOpacity>
-          </View>
-          <View style={{ width: "60%" }}>
-            <TouchableOpacity
-              activeOpacity={0.6}
-              style={styles.button}
-              onPress={() => navigation.navigate("Discover")}
-            >
-              <Text style={styles.button.text}>Login</Text>
-            </TouchableOpacity>
-
-            <Text
-              style={[styles.button3.text, { fontSize: 14, marginTop: 15 }]}
-            >
-              Don't have an Account?{" "}
-              <Text
-                style={[styles.text, { fontSize: 14 }]}
-                onPress={() => navigation.navigate("Register")}
-              >
-                Signup
-              </Text>
-            </Text>
-          </View>
         </View>
       </KeyboardAvoidingView>
     </SafeAreaView>
@@ -123,9 +120,9 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     maxWidth: "70%",
-    marginTop: 60,
     flexDirection: "row",
     justifyContent: "space-between",
+    marginTop: 13,
     images: {
       marginHorizontal: 7,
     },
@@ -135,9 +132,21 @@ const styles = StyleSheet.create({
     color: "#FF4EA1",
     fontSize: 12,
     lineHeight: 20,
+    heading: {
+      color: "#2E313D",
+      fontSize: 24,
+      lineHeight: 32,
+    },
+    subheading: {
+      fontSize: 14,
+      color: "#9799A5",
+      maxWidth: "60%",
+      textAlign: "center",
+      marginTop: 4,
+    },
   },
   button: {
-    marginTop: 50,
+    marginTop: 33,
     paddingVertical: 15,
     backgroundColor: "#FF21A4",
     borderRadius: 6,
@@ -163,4 +172,4 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
 });
-export default Login;
+export default Register;

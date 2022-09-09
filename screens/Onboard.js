@@ -1,13 +1,6 @@
 import React from "react";
-import {
-  Button,
-  Image,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import Images from "../assets/Images";
 const Onboard = ({ navigation }) => {
   return (
@@ -25,7 +18,11 @@ const Onboard = ({ navigation }) => {
           <Text style={styles.text}>
             Join now and start talking with matches nearby
           </Text>
-          <TouchableOpacity activeOpacity={0.6} style={styles.button}>
+          <TouchableOpacity
+            activeOpacity={0.6}
+            style={styles.button}
+            onPress={() => navigation.navigate("Register")}
+          >
             <Text style={styles.button.text}>Create an Account</Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -45,13 +42,17 @@ const Onboard = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
+  parent: {
+    backgroundColor: "#fff",
+  },
   container: {
     height: "100%",
-    justifyContent: "space-between",
+    justifyContent: "center",
     alignItems: "center",
   },
   textContainer: {
     maxWidth: "60%",
+    marginTop: 72,
   },
   text: {
     textAlign: "center",
