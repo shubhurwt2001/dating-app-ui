@@ -10,5 +10,12 @@ const Images = {
   DiscoverUser: require("../assets/images/Group_769.png"),
   Like: require("../assets/images/Group_789.png"),
   Dislike: require("../assets/images/Group_788.png"),
+  SuperLike: require("../assets/images/Group_790.png"),
+  Unsplash: require("../assets/images/unsplash.jpg"),
+  Study: require("../assets/images/study.png"),
+  Location: require("../assets/images/location.png"),
+  Spotify: require("../assets/images/Album_1.png"),
+  Instagram: require("../assets/images/I_2.png"),
 };
+
 export default Images;

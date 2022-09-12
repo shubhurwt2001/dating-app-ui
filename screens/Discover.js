@@ -1,12 +1,5 @@
-import React, { useRef } from "react";
-import {
-  Image,
-  Platform,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import React, { useRef, useState } from "react";
+import { Platform, StyleSheet, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Icon from "react-native-vector-icons/FontAwesome";
 import Swiper from "react-native-deck-swiper";
@@ -15,32 +8,56 @@ import Card from "./components/Card";
 import OverlayLabel from "./data/OverlayLable";
 
 const Discover = ({ navigation }) => {
-  const useSwiper = useRef();
-  const handleOnSwipedLeft = () => useSwiper.current.swipeLeft();
-  const handleOnSwipedRight = () => useSwiper.current.swipeRight();
+  const [enableSwipes, setEnableSwipes] = useState(false);
 
+  const useSwiper = useRef();
+  const handleOnSwipedLeft = () => {
+    useSwiper.current.swipeLeft();
+  };
+  const handleOnSwipedRight = () => useSwiper.current.swipeRight();
+  const handleOnSwipedTop = () => {
+    useSwiper.current.swipeTop();
+  };
+
+  let lastPress = 0;
+
+  const onDoublePress = () => {
+    const time = new Date().getTime();
+    const delta = time - lastPress;
+
+    const DOUBLE_PRESS_DELAY = 400;
+    if (delta < DOUBLE_PRESS_DELAY) {
+      navigation.navigate("Profile");
+    }
+    lastPress = time;
+  };
   return (
     <SafeAreaView style={styles.parent}>
       <View style={styles.container}>
         <Swiper
           ref={useSwiper}
-          animateCardOpacity
+          // animateCardOpacity
           cards={PhotoCards}
           renderCard={(card) => <Card card={card} />}
           cardIndex={0}
           backgroundColor="#fff"
-          stackSize={2}
+          stackSize={3}
+          stackScale={10}
+          stackSeparation={30}
           infinite
+          swipeAnimationDuration={800}
           showSecondCard
-          animateOverlayLabelsOpacity
-          onSwipedTop={handleOnSwipedRight}
+          // animateOverlayLabelsOpacity
           onSwipedBottom={handleOnSwipedLeft}
+          onTapCard={() => onDoublePress()}
+          horizontalSwipe={!enableSwipes}
+          verticalSwipe={!enableSwipes}
           overlayLabels={{
             bottom: {
-              title: "NOPE",
+              title: "DISLIKE",
               element: (
                 <OverlayLabel
-                  label={false}
+                  label={"Dislike"}
                   color="#AEAEAE"
                   background="rgba(186, 187, 188,0.5)"
                 />
@@ -50,10 +67,10 @@ const Discover = ({ navigation }) => {
               },
             },
             left: {
-              title: "NOPE",
+              title: "DISLIKE",
               element: (
                 <OverlayLabel
-                  label={false}
+                  label={"Dislike"}
                   color="#AEAEAE"
                   background="rgba(186, 187, 188,0.5)"
                 />
@@ -66,7 +83,7 @@ const Discover = ({ navigation }) => {
               title: "LIKE",
               element: (
                 <OverlayLabel
-                  label={true}
+                  label={"Like"}
                   color="#D9B372"
                   background="rgba(205, 191, 165,0.5)"
                 />
@@ -78,10 +95,10 @@ const Discover = ({ navigation }) => {
               },
             },
             top: {
-              title: "LIKE",
+              title: "SUPERLIKE",
               element: (
                 <OverlayLabel
-                  label={true}
+                  label={"Superlike"}
                   color="#D9B372"
                   background="rgba(205, 191, 165,0.5)"
                 />
@@ -93,13 +110,19 @@ const Discover = ({ navigation }) => {
               },
             },
           }}
-        />
+        ></Swiper>
         <View style={styles.button}>
           <TouchableOpacity
             style={[styles.button.common, { backgroundColor: "#EA008A" }]}
             onPress={handleOnSwipedLeft}
           >
             <Icon name="times" size={28} color="#fff"></Icon>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.button.common, { backgroundColor: "#D9B372" }]}
+            onPress={handleOnSwipedTop}
+          >
+            <Icon name="heart" size={28} color="#fff"></Icon>
           </TouchableOpacity>
           <TouchableOpacity
             style={[styles.button.common, { backgroundColor: "#21C0F1" }]}

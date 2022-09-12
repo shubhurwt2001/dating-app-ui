@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
   card: {
     padding: 0,
     marginTop: Platform.OS == "ios" ? -100 : -50,
-    height: height - 250,
+    height: height - 270,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#fff",

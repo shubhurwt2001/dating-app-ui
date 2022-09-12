@@ -16,7 +16,13 @@ const OverlayLabel = ({ label, color, background }) => (
       { borderColor: color, backgroundColor: background },
     ]}
   >
-    {label ? <Image source={Images.Like} /> : <Image source={Images.Dislike} />}
+    {label == "Like" ? (
+      <Image source={Images.Like} />
+    ) : label == "Dislike" ? (
+      <Image source={Images.Dislike} />
+    ) : (
+      <Image source={Images.SuperLike} />
+    )}
   </View>
 );
 
@@ -25,7 +31,7 @@ const height = Dimensions.get("window").height;
 const styles = StyleSheet.create({
   overlayLabel: {
     marginTop: Platform.OS == "ios" ? -100 : -50,
-    height: height - 250,
+    height: height - 270,
     justifyContent: "center",
     alignItems: "center",
     borderWidth: 4,

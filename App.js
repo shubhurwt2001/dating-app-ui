@@ -1,9 +1,13 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import {
+  Dimensions,
   Image,
+  KeyboardAvoidingView,
+  Platform,
   StatusBar,
   StyleSheet,
+  Text,
   TouchableOpacity,
   View,
 } from "react-native";
@@ -14,6 +18,8 @@ import Register from "./screens/Register";
 import ForgetPassword from "./screens/ForgetPassword";
 import Discover from "./screens/Discover";
 import Images from "./assets/Images";
+import Profile from "./screens/Profile";
+import About from "./screens/About";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -52,11 +58,50 @@ export default function App() {
     }
     if (side == "right") {
       return (
-        <TouchableOpacity onPress={() => alert("h")}>
+        <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
           <Image source={Images.DiscoverUser} />
         </TouchableOpacity>
       );
     }
+  };
+
+  const skipButton = (navigation) => {
+    return (
+      <TouchableOpacity
+        onPress={() => navigation.pop()}
+        // activeOpacity={0.6}
+        style={{
+          paddingHorizontal: 15,
+          paddingVertical: 6,
+          backgroundColor: "#F5F5F5",
+          borderRadius: 4,
+        }}
+      >
+        <Text style={{ color: "#999AA1" }}>Skip</Text>
+      </TouchableOpacity>
+    );
+  };
+
+  const progressBar = (width) => {
+    return (
+      <View
+        style={{
+          height: 4,
+          backgroundColor: "#9799A52E",
+          borderRadius: 4,
+          width: Dimensions.get("window").width / 2.5,
+        }}
+      >
+        <View
+          style={{
+            height: 4,
+            backgroundColor: "#EA008A",
+            borderRadius: 4,
+            width: width,
+          }}
+        ></View>
+      </View>
+    );
   };
   return (
     <NavigationContainer>
@@ -104,6 +149,20 @@ export default function App() {
           })}
         />
         <Stack.Screen
+          name="About"
+          component={About}
+          options={({ navigation }) => ({
+            headerShadowVisible: false,
+            title: "",
+            headerStyle: {
+              backgroundColor: "#fff",
+            },
+            headerLeft: () => backButton(navigation),
+            headerRight: () => skipButton(navigation),
+            headerTitle: () => progressBar("20%"),
+          })}
+        />
+        <Stack.Screen
           name="Discover"
           component={Discover}
           options={({ navigation }) => ({
@@ -112,6 +171,11 @@ export default function App() {
             headerTitle: () => discoverHeader(navigation, "title"),
             headerRight: () => discoverHeader(navigation, "right"),
           })}
+        />
+        <Stack.Screen
+          name="Profile"
+          component={Profile}
+          options={{ headerShown: false }}
         />
       </Stack.Navigator>
     </NavigationContainer>

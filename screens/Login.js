@@ -17,10 +17,14 @@ import Images from "../assets/Images";
 const width = Dimensions.get("window").width;
 const Login = ({ navigation }) => {
   return (
-    <SafeAreaView style={styles.parent}>
-      <KeyboardAvoidingView
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={[styles.container, { flex: 1 }]}
+    >
+      <SafeAreaView style={styles.parent}>
+        {/* <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "margin"}
-      >
+      > */}
         <View style={styles.container}>
           <View style={{ alignItems: "center" }}>
             <Image
@@ -72,14 +76,13 @@ const Login = ({ navigation }) => {
               placeholder="Create a Password"
             ></TextInput>
 
-            <TouchableOpacity>
-              <Text
-                style={styles.text}
+            <View style={{ alignSelf: "flex-end" }}>
+              <TouchableOpacity
                 onPress={() => navigation.navigate("ForgetPassword")}
               >
-                Forgot Password?
-              </Text>
-            </TouchableOpacity>
+                <Text style={styles.text}>Forgot Password?</Text>
+              </TouchableOpacity>
+            </View>
           </View>
           <View style={{ width: "60%" }}>
             <TouchableOpacity
@@ -103,8 +106,9 @@ const Login = ({ navigation }) => {
             </Text>
           </View>
         </View>
-      </KeyboardAvoidingView>
-    </SafeAreaView>
+        {/* </KeyboardAvoidingView> */}
+      </SafeAreaView>
+    </KeyboardAvoidingView>
   );
 };
 

@@ -18,10 +18,14 @@ import Images from "../assets/Images";
 const width = Dimensions.get("window").width;
 const Register = ({ navigation }) => {
   return (
-    <SafeAreaView style={styles.parent}>
-      <KeyboardAvoidingView
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={[styles.container, { flex: 1 }]}
+    >
+      <SafeAreaView style={styles.parent}>
+        {/* <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "margin"}
-      >
+      > */}
         <View style={styles.container}>
           <View style={{ alignItems: "center" }}>
             <Image
@@ -53,7 +57,11 @@ const Register = ({ navigation }) => {
             ></TextInput>
           </View>
           <View style={{ width: "60%" }}>
-            <TouchableOpacity activeOpacity={0.6} style={styles.button}>
+            <TouchableOpacity
+              activeOpacity={0.6}
+              style={styles.button}
+              onPress={() => navigation.navigate("About")}
+            >
               <Text style={styles.button.text}>Next</Text>
             </TouchableOpacity>
 
@@ -100,8 +108,9 @@ const Register = ({ navigation }) => {
             </TouchableOpacity>
           </View>
         </View>
-      </KeyboardAvoidingView>
-    </SafeAreaView>
+        {/* </KeyboardAvoidingView> */}
+      </SafeAreaView>
+    </KeyboardAvoidingView>
   );
 };
 
