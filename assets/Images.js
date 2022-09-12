@@ -16,6 +16,9 @@ const Images = {
   Location: require("../assets/images/location.png"),
   Spotify: require("../assets/images/Album_1.png"),
   Instagram: require("../assets/images/I_2.png"),
+  Female1: require("../assets/images/female_1.png"),
+  Male1: require("../assets/images/male_1.png"),
+  Thumb: require("../assets/images/thumb.png"),
 };
 
 export default Images;

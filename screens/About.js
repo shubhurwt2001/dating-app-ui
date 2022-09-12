@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Button,
   Dimensions,
@@ -12,61 +12,100 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import Images from "../assets/Images";
 
-const About = () => {
+const About = ({navigation}) => {
+  const [gender, setGender] = useState(null);
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={[styles.container, { flex: 1 }]}
+      keyboardVerticalOffset={50}
     >
-      <SafeAreaView style={styles.container}>
-        <ScrollView>
-          <View style={styles.head}>
-            <Text style={styles.text.heading}>About you</Text>
-            <Text style={styles.text}>
-              Join now and start talking with matches nearby
-            </Text>
-          </View>
+      {/* <SafeAreaView> */}
+      <ScrollView style={styles.container}>
+        <View style={styles.head}>
+          <Text style={styles.text.heading}>About you</Text>
+          <Text style={styles.text}>
+            Join now and start talking with matches nearby
+          </Text>
+        </View>
 
-          <View
-            style={{
-              marginTop: 10,
-              marginHorizontal: 16,
-              width: Dimensions.get("window").width - 32,
-              alignItems: "center",
-            }}
-          >
-            <TextInput
-              style={styles.input}
-              placeholder="First Name"
-            ></TextInput>
+        <View
+          style={{
+            marginTop: 10,
+            marginHorizontal: 16,
+            width: Dimensions.get("window").width - 32,
+            alignItems: "center",
+          }}
+        >
+          <TextInput style={styles.input} placeholder="First Name"></TextInput>
 
-            <TextInput style={styles.input} placeholder="Last Name"></TextInput>
+          <TextInput style={styles.input} placeholder="Last Name"></TextInput>
 
-            <TextInput
-              style={styles.input}
-              placeholder="Date of birth (DD/MM/YYYY)"
-            ></TextInput>
-
-            <TextInput style={styles.input} placeholder="Country"></TextInput>
-            <TextInput style={styles.input} placeholder="Zip Code"></TextInput>
-            <TextInput
-              style={[styles.input, { height: 100 }]}
-              multiline
-              placeholder="Bio"
-              numberOfLines={5}
-            ></TextInput>
+          <TextInput
+            style={styles.input}
+            placeholder="Date of birth (DD/MM/YYYY)"
+          ></TextInput>
+          <View style={styles.radio}>
             <TouchableOpacity
-              activeOpacity={0.6}
-              style={styles.button}
-              onPress={() => navigation.navigate("About")}
+              style={[
+                styles.radio.button,
+                { marginRight: 7.5 },
+                gender == "male" && styles.radio.active,
+              ]}
+              onPress={() => setGender("male")}
             >
-              <Text style={styles.button.text}>Next</Text>
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <Image source={Images.Male1} />
+                <Text
+                  style={[
+                    styles.radio.text,
+                    gender == "male" && styles.radio.text.active,
+                  ]}
+                >
+                  Male
+                </Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => setGender("female")}
+              style={[
+                styles.radio.button,
+                { marginLeft: 7.5 },
+                gender == "female" && styles.radio.active,
+              ]}
+            >
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <Image source={Images.Female1} />
+                <Text
+                  style={[
+                    styles.radio.text,
+                    gender == "female" && styles.radio.text.active,
+                  ]}
+                >
+                  Female
+                </Text>
+              </View>
             </TouchableOpacity>
           </View>
-        </ScrollView>
-      </SafeAreaView>
+          <TextInput style={styles.input} placeholder="Country"></TextInput>
+          <TextInput style={styles.input} placeholder="Zip Code"></TextInput>
+          <TextInput
+            style={[styles.input, { height: 100 }]}
+            multiline
+            placeholder="Bio"
+            numberOfLines={5}
+          ></TextInput>
+          <TouchableOpacity
+            activeOpacity={0.6}
+            style={styles.button}
+            onPress={() => navigation.navigate("Preference")}
+          >
+            <Text style={styles.button.text}>Next</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+      {/* </SafeAreaView> */}
     </KeyboardAvoidingView>
   );
 };
@@ -76,6 +115,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     backgroundColor: "#fff",
+    paddingTop: 18,
   },
   head: {
     justifyContent: "center",
@@ -85,6 +125,7 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 33,
+    marginBottom:80,
     paddingVertical: 15,
     backgroundColor: "#FF21A4",
     borderRadius: 6,
@@ -115,5 +156,33 @@ const styles = StyleSheet.create({
     color: "#9799A5",
     fontSize: 14,
     width: "100%",
+  },
+  radio: {
+    marginVertical: 8,
+    justifyContent: "space-between",
+    alignItems: "center",
+    flexDirection: "row",
+    active: {
+      borderColor: "#FF4EA1",
+      backgroundColor: "#FF4EA1",
+    },
+    text: {
+      fontSize: 14,
+      color: "#9799A5",
+      display: "flex",
+      alignItems: "center",
+      marginLeft: 5,
+      active: {
+        color: "#fff",
+      },
+    },
+    button: {
+      width: Dimensions.get("window").width / 2 - 22.5,
+      borderColor: "#E9E9E9",
+      borderRadius: 4,
+      borderWidth: 1,
+      paddingVertical: 12,
+      paddingHorizontal: 35,
+    },
   },
 });

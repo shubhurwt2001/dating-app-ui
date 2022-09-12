@@ -20,6 +20,9 @@ import Discover from "./screens/Discover";
 import Images from "./assets/Images";
 import Profile from "./screens/Profile";
 import About from "./screens/About";
+import Preference from "./screens/Preference";
+import Interest from "./screens/Interest";
+import Prefer from "./screens/Prefer";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -106,7 +109,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <StatusBar animated={true} barStyle={"dark-content"} />
-      <Stack.Navigator>
+      <Stack.Navigator screenOptions={{ headerTitleAlign: "center" }}>
         <Stack.Screen
           name="Home"
           component={Onboard}
@@ -122,6 +125,7 @@ export default function App() {
               backgroundColor: "#fff",
             },
             headerLeft: () => backButton(navigation),
+            headerBackVisible: false,
           })}
         />
         <Stack.Screen
@@ -134,6 +138,7 @@ export default function App() {
               backgroundColor: "#fff",
             },
             headerLeft: () => backButton(navigation),
+            headerBackVisible: false,
           })}
         />
         <Stack.Screen
@@ -146,6 +151,7 @@ export default function App() {
               backgroundColor: "#fff",
             },
             headerLeft: () => backButton(navigation),
+            headerBackVisible: false,
           })}
         />
         <Stack.Screen
@@ -158,8 +164,54 @@ export default function App() {
               backgroundColor: "#fff",
             },
             headerLeft: () => backButton(navigation),
+            headerBackVisible: false,
             headerRight: () => skipButton(navigation),
             headerTitle: () => progressBar("20%"),
+          })}
+        />
+        <Stack.Screen
+          name="Preference"
+          component={Preference}
+          options={({ navigation }) => ({
+            headerShadowVisible: false,
+            title: "",
+            headerStyle: {
+              backgroundColor: "#fff",
+            },
+            headerLeft: () => backButton(navigation),
+            headerBackVisible: false,
+            headerRight: () => skipButton(navigation),
+            headerTitle: () => progressBar("40%"),
+          })}
+        />
+        <Stack.Screen
+          name="Interest"
+          component={Interest}
+          options={({ navigation }) => ({
+            headerShadowVisible: false,
+            title: "",
+            headerStyle: {
+              backgroundColor: "#fff",
+            },
+            headerLeft: () => backButton(navigation),
+            headerBackVisible: false,
+            headerRight: () => skipButton(navigation),
+            headerTitle: () => progressBar("50%"),
+          })}
+        />
+         <Stack.Screen
+          name="Prefer"
+          component={Prefer}
+          options={({ navigation }) => ({
+            headerShadowVisible: false,
+            title: "",
+            headerStyle: {
+              backgroundColor: "#fff",
+            },
+            headerLeft: () => backButton(navigation),
+            headerBackVisible: false,
+            headerRight: () => skipButton(navigation),
+            headerTitle: () => progressBar("70%"),
           })}
         />
         <Stack.Screen
@@ -168,6 +220,7 @@ export default function App() {
           options={({ navigation }) => ({
             headerShadowVisible: false,
             headerLeft: () => discoverHeader(navigation, "left"),
+            headerBackVisible: false,
             headerTitle: () => discoverHeader(navigation, "title"),
             headerRight: () => discoverHeader(navigation, "right"),
           })}
