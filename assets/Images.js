@@ -19,6 +19,7 @@ const Images = {
   Female1: require("../assets/images/female_1.png"),
   Male1: require("../assets/images/male_1.png"),
   Thumb: require("../assets/images/thumb.png"),
+  Chats: require("../assets/images/valerie-elash-G3wBRsVfulU-unsplash.png"),
 };
 
 export default Images;

@@ -23,6 +23,8 @@ import About from "./screens/About";
 import Preference from "./screens/Preference";
 import Interest from "./screens/Interest";
 import Prefer from "./screens/Prefer";
+import Destination from "./screens/Destination";
+import Chats from "./screens/Chats";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -54,7 +56,7 @@ export default function App() {
     }
     if (side == "title") {
       return (
-        <TouchableOpacity onPress={() => alert("h")}>
+        <TouchableOpacity onPress={() => navigation.navigate("Chats")}>
           <Image source={Images.DiscoverTitle} />
         </TouchableOpacity>
       );
@@ -199,7 +201,7 @@ export default function App() {
             headerTitle: () => progressBar("50%"),
           })}
         />
-         <Stack.Screen
+        <Stack.Screen
           name="Prefer"
           component={Prefer}
           options={({ navigation }) => ({
@@ -212,6 +214,21 @@ export default function App() {
             headerBackVisible: false,
             headerRight: () => skipButton(navigation),
             headerTitle: () => progressBar("70%"),
+          })}
+        />
+        <Stack.Screen
+          name="Destination"
+          component={Destination}
+          options={({ navigation }) => ({
+            headerShadowVisible: false,
+            title: "",
+            headerStyle: {
+              backgroundColor: "#fff",
+            },
+            headerLeft: () => backButton(navigation),
+            headerBackVisible: false,
+            headerRight: () => skipButton(navigation),
+            headerTitle: () => progressBar("85%"),
           })}
         />
         <Stack.Screen
@@ -228,6 +245,11 @@ export default function App() {
         <Stack.Screen
           name="Profile"
           component={Profile}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Chats"
+          component={Chats}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

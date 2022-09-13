@@ -20,6 +20,11 @@ const random = [
   "network",
 ];
 const Prefer = ({ navigation }) => {
+  const [first, setFirst] = useState(null);
+  const [second, setSecond] = useState(null);
+  const [third, setThird] = useState(null);
+  const [fourth, setFourth] = useState(null);
+  const [fifth, setFifth] = useState(null);
   return (
     <View style={styles.container}>
       <View style={styles.head}>
@@ -41,12 +46,106 @@ const Prefer = ({ navigation }) => {
         </Text>
         <View style={styles.pillContainer}>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <TouchableOpacity style={styles.pill}>
-              <Text style={styles.text}>Book</Text>
+            <TouchableOpacity
+              style={[styles.pill, first == 1 && styles.selected]}
+              onPress={() => setFirst(1)}
+            >
+              <Text style={[styles.text, first == 1 && styles.selected.text]}>Book</Text>
             </TouchableOpacity>
-            <Text style={styles.text}>or</Text>
-            <TouchableOpacity style={styles.pill}>
-              <Text style={styles.text}>Movie</Text>
+            <Text
+              style={[styles.text, { paddingHorizontal: 15, fontSize: 15 }]}
+            >
+              or
+            </Text>
+            <TouchableOpacity
+              style={[styles.pill, first == 2 && styles.selected]}
+              onPress={() => setFirst(2)}
+            >
+              <Text style={[styles.text, first == 2 && styles.selected.text]}>Movie</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View style={styles.pillContainer}>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <TouchableOpacity
+              style={[styles.pill, second == 1 && styles.selected]}
+              onPress={() => setSecond(1)}
+            >
+              <Text style={[styles.text, second == 1 && styles.selected.text]}>Beer</Text>
+            </TouchableOpacity>
+            <Text
+              style={[styles.text, { paddingHorizontal: 15, fontSize: 15 }]}
+            >
+              or
+            </Text>
+            <TouchableOpacity
+              style={[styles.pill, second == 2 && styles.selected]}
+              onPress={() => setSecond(2)}
+            >
+              <Text style={[styles.text, second == 2 && styles.selected.text]}>Wine</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View style={styles.pillContainer}>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <TouchableOpacity
+              style={[styles.pill, third == 1 && styles.selected]}
+              onPress={() => setThird(1)}
+            >
+              <Text style={[styles.text, third == 1 && styles.selected.text]}>Mountain</Text>
+            </TouchableOpacity>
+            <Text
+              style={[styles.text, { paddingHorizontal: 15, fontSize: 15 }]}
+            >
+              or
+            </Text>
+            <TouchableOpacity
+              style={[styles.pill, third == 2 && styles.selected]}
+              onPress={() => setThird(2)}
+            >
+              <Text style={[styles.text, third == 2 && styles.selected.text]}>Beach</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View style={styles.pillContainer}>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <TouchableOpacity
+              style={[styles.pill, fourth == 1 && styles.selected]}
+              onPress={() => setFourth(1)}
+            >
+              <Text style={[styles.text, fourth == 1 && styles.selected.text]}>Indoors</Text>
+            </TouchableOpacity>
+            <Text
+              style={[styles.text, { paddingHorizontal: 15, fontSize: 15 }]}
+            >
+              or
+            </Text>
+            <TouchableOpacity
+              style={[styles.pill, fourth == 2 && styles.selected]}
+              onPress={() => setFourth(2)}
+            >
+              <Text style={[styles.text, fourth == 2 && styles.selected.text]}>Outdoors</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View style={styles.pillContainer}>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <TouchableOpacity
+              style={[styles.pill, fifth == 1 && styles.selected]}
+              onPress={() => setFifth(1)}
+            >
+              <Text style={[styles.text, fifth == 1 && styles.selected.text]}>Early Morning</Text>
+            </TouchableOpacity>
+            <Text
+              style={[styles.text, { paddingHorizontal: 15, fontSize: 15 }]}
+            >
+              or
+            </Text>
+            <TouchableOpacity
+              style={[styles.pill, fifth == 2 && styles.selected]}
+              onPress={() => setFifth(2)}
+            >
+              <Text style={[styles.text, fifth == 2 && styles.selected.text]}>Late Night</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -60,7 +159,7 @@ const Prefer = ({ navigation }) => {
         <TouchableOpacity
           activeOpacity={0.6}
           style={styles.button}
-          onPress={() => navigation.navigate("About")}
+          onPress={() => navigation.navigate("Destination")}
         >
           <Text style={styles.button.text}>Next</Text>
         </TouchableOpacity>
@@ -84,7 +183,7 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   pillContainer: {
-    marginTop: 15,
+    marginTop: 20,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -92,7 +191,10 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     backgroundColor: "#F8F8F8",
     borderRadius: 8,
-    width: Dimensions.get("window").width / 2 - 30,
+    width: Dimensions.get("window").width / 2 - 37.5,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
   button: {
     marginTop: 33,
@@ -121,7 +223,7 @@ const styles = StyleSheet.create({
     },
   },
   selected: {
-    backgroundColor: "#FC3D6B",
+    backgroundColor: "#2E313D",
     text: { color: "#fff" },
   },
 });
