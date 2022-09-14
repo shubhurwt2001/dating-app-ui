@@ -7,6 +7,7 @@ const Images = {
   Google: require("../assets/images/Group_61.png"),
   DiscoverLogo: require("../assets/images/gray-logo.png"),
   DiscoverTitle: require("../assets/images/Group_770.png"),
+  DiscoverTitleActive: require("../assets/images/Group_627.png"),
   DiscoverUser: require("../assets/images/Group_769.png"),
   Like: require("../assets/images/Group_789.png"),
   Dislike: require("../assets/images/Group_788.png"),

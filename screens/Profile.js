@@ -8,15 +8,18 @@ import {
   Text,
   TouchableOpacity,
   View,
+  // StatusBar,
 } from "react-native";
 import Icon from "react-native-vector-icons/SimpleLineIcons";
 import IconF from "react-native-vector-icons/FontAwesome";
 
 import Images from "../assets/Images";
+import { StatusBar } from "expo-status-bar";
 
 const Profile = ({ navigation }) => {
   return (
     <View style={styles.container}>
+      <StatusBar animated={true} style="light"/>
       <ScrollView>
         <View>
           <Image

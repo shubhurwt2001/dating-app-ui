@@ -18,6 +18,7 @@ import {
 import Icon from "react-native-vector-icons/FontAwesome5";
 import Images from "../assets/Images";
 import { BlurView } from "expo-blur";
+import BottomHeader from "./components/BottomHeader";
 const { StatusBarManager } = NativeModules;
 
 const Chats = ({ navigation }) => {
@@ -33,14 +34,21 @@ const Chats = ({ navigation }) => {
     setList(filtered);
   };
   useEffect(() => {
-    StatusBarManager.getHeight((height) => {
-      setStatusHeight(height.height);
-    });
+    if (Platform.OS == "ios") {
+      StatusBarManager.getHeight((height) => {
+        setStatusHeight(height.height);
+      });
+    } else {
+      setStatusHeight(StatusBar.currentHeight);
+    }
   }, []);
 
   return (
     <View
-      style={[styles.container, { paddingVertical: statusHeight }]}
+      style={[
+        styles.container,
+        Platform.OS == "ios" && { paddingVertical: statusHeight },
+      ]}
       onStartShouldSetResponder={() => setActive(null)}
     >
       <ScrollView>
@@ -55,39 +63,72 @@ const Chats = ({ navigation }) => {
 
         {list.map((i) => {
           return (
-            <View key={i}c>
-              {active == i && (
-                <BlurView
-                  intensity={8}
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    tint: "light",
-                    right: 0,
-                    bottom: 0,
-                    left: 0,
-                    zIndex: 9,
-                  }}
-                >
-                  <View style={styles.buttonContainer}>
-                    <TouchableOpacity
-                      style={[styles.button, styles.buttonLeft]}
-                      onPress={() => deleteChat(i)}
-                    >
-                      <Text style={styles.buttonText}>
-                        <Icon name="trash" /> Delete
-                      </Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      style={[styles.button, styles.buttonRight]}
-                    >
-                      <Text style={styles.buttonText}>
-                        <Icon name="info-circle" /> Info
-                      </Text>
-                    </TouchableOpacity>
+            <View key={i}>
+              {active == i &&
+                (Platform.OS == "ios" ? (
+                  <BlurView
+                    intensity={8}
+                    style={{
+                      position: "absolute",
+                      top: 0,
+                      tint: "light",
+                      right: 0,
+                      bottom: 0,
+                      left: 0,
+                      zIndex: 9,
+                    }}
+                  >
+                    <View style={styles.buttonContainer}>
+                      <TouchableOpacity
+                        style={[styles.button, styles.buttonLeft]}
+                        onPress={() => deleteChat(i)}
+                      >
+                        <Text style={styles.buttonText}>
+                          <Icon name="trash" /> Delete
+                        </Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        style={[styles.button, styles.buttonRight]}
+                      >
+                        <Text style={styles.buttonText}>
+                          <Icon name="info-circle" /> Info
+                        </Text>
+                      </TouchableOpacity>
+                    </View>
+                  </BlurView>
+                ) : (
+                  <View
+                    // intensity={8}
+                    style={{
+                      position: "absolute",
+                      top: 0,
+                      tint: "light",
+                      right: 0,
+                      bottom: 0,
+                      left: 0,
+                      zIndex: 9,
+                      backgroundColor: "rgba(255,255,255,0.7)",
+                    }}
+                  >
+                    <View style={styles.buttonContainer}>
+                      <TouchableOpacity
+                        style={[styles.button, styles.buttonLeft]}
+                        onPress={() => deleteChat(i)}
+                      >
+                        <Text style={styles.buttonText}>
+                          <Icon name="trash" /> Delete
+                        </Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        style={[styles.button, styles.buttonRight]}
+                      >
+                        <Text style={styles.buttonText}>
+                          <Icon name="info-circle" /> Info
+                        </Text>
+                      </TouchableOpacity>
+                    </View>
                   </View>
-                </BlurView>
-              )}
+                ))}
               <Pressable
                 onLongPress={() => setActive(i)}
                 onPress={() => setActive(null)}
@@ -124,6 +165,7 @@ const Chats = ({ navigation }) => {
           );
         })}
       </ScrollView>
+      <BottomHeader navigation={navigation} active={"Chats"} />
     </View>
   );
 };
