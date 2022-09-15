@@ -25,6 +25,7 @@ import Interest from "./screens/Interest";
 import Prefer from "./screens/Prefer";
 import Destination from "./screens/Destination";
 import Chats from "./screens/Chats";
+import Chat from "./screens/Chat";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -110,7 +111,11 @@ export default function App() {
   };
   return (
     <NavigationContainer>
-      <StatusBar animated={true} backgroundColor="#fff" barStyle={"dark-content"} />
+      <StatusBar
+        animated={true}
+        backgroundColor="#fff"
+        barStyle={"dark-content"}
+      />
       <Stack.Navigator screenOptions={{ headerTitleAlign: "center" }}>
         <Stack.Screen
           name="Home"
@@ -250,6 +255,11 @@ export default function App() {
         <Stack.Screen
           name="Chats"
           component={Chats}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Chat"
+          component={Chat}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

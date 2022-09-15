@@ -131,7 +131,10 @@ const Chats = ({ navigation }) => {
                 ))}
               <Pressable
                 onLongPress={() => setActive(i)}
-                onPress={() => setActive(null)}
+                onPress={() => {
+                  setActive(null);
+                  navigation.navigate("Chat");
+                }}
                 style={({ pressed }) => [
                   {
                     opacity: pressed ? 0.7 : 1,
